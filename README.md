@@ -1,54 +1,59 @@
-# Vite + React + Motoko
+# `pintaro`
 
-### Get started directly in your browser:
+Welcome to your new `pintaro` project and to the Internet Computer development community. By default, creating a new project adds this README and some template files to your project directory. You can edit these template files to customize your project and to include your own code to speed up the development cycle.
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/rvanasa/vite-react-motoko)
+To get started, you might want to explore the project directory structure and the default configuration file. Working with this project in your development environment will not affect any production deployment or identity tokens.
 
-This template gives you everything you need to build a full-stack Web3 application on the [Internet Computer](https://internetcomputer.org/).
+To learn more before you start working with `pintaro`, see the following documentation available online:
 
-For an example of a real-world dapp built using this starter project, check out the [source code](https://github.com/dfinity/feedback) for DFINITY's [Developer Experience Feedback Board](https://dx.internetcomputer.org/).
+- [Quick Start](https://internetcomputer.org/docs/current/developer-docs/setup/deploy-locally)
+- [SDK Developer Tools](https://internetcomputer.org/docs/current/developer-docs/setup/install)
+- [Motoko Programming Language Guide](https://internetcomputer.org/docs/current/motoko/main/motoko)
+- [Motoko Language Quick Reference](https://internetcomputer.org/docs/current/motoko/main/language-manual)
 
-## 📦 Create a New Project
+If you want to start working on your project right away, you might want to try the following commands:
 
-Make sure that [Node.js](https://nodejs.org/en/) `>= 16` and [`dfx`](https://internetcomputer.org/docs/current/developer-docs/build/install-upgrade-remove) `>= 0.14` are installed on your system.
-
-Run the following commands in a new, empty project directory:
-
-```sh
-npx degit rvanasa/vite-react-motoko # Download this starter project
-dfx start --clean --background # Run dfx in the background
-npm run setup # Install packages, deploy canisters, and generate type bindings
-
-npm start # Start the development server
+```bash
+cd pintaro/
+dfx help
+dfx canister --help
 ```
 
-When ready, run `dfx deploy --network ic` to deploy your application to the Internet Computer.
+## Running the project locally
 
-## 🛠️ Technology Stack
+If you want to test your project locally, you can use the following commands:
 
-- [Vite](https://vitejs.dev/): high-performance tooling for front-end web development
-- [React](https://reactjs.org/): a component-based UI library
-- [TypeScript](https://www.typescriptlang.org/): JavaScript extended with syntax for types
-- [Sass](https://sass-lang.com/): an extended syntax for CSS stylesheets
-- [Prettier](https://prettier.io/): code formatting for a wide range of supported languages
-- [Motoko](https://github.com/dfinity/motoko#readme): a safe and simple programming language for the Internet Computer
-- [Mops](https://mops.one): an on-chain community package manager for Motoko
-- [mo-dev](https://github.com/dfinity/motoko-dev-server#readme): a live reload development server for Motoko
-- [@ic-reactor](https://github.com/B3Pay/ic-reactor): A suite of JavaScript libraries for seamless frontend development on the Internet Computer
+```bash
+# Starts the replica, running in the background
+dfx start --background
 
-## 📚 Documentation
+# Deploys your canisters to the replica and generates your candid interface
+dfx deploy
+```
 
-- [Vite developer docs](https://vitejs.dev/guide/)
-- [React quick start guide](https://react.dev/learn)
-- [Internet Computer docs](https://internetcomputer.org/docs/current/developer-docs/ic-overview)
-- [`dfx.json` reference schema](https://internetcomputer.org/docs/current/references/dfx-json-reference/)
-- [Motoko developer docs](https://internetcomputer.org/docs/current/developer-docs/build/cdks/motoko-dfinity/motoko/)
-- [Mops usage instructions](https://j4mwm-bqaaa-aaaam-qajbq-cai.ic0.app/#/docs/install)
-- [@ic-reactor/react](https://b3pay.github.io/ic-reactor/modules/react.html)
+Once the job completes, your application will be available at `http://localhost:4943?canisterId={asset_canister_id}`.
 
-## 💡 Tips and Tricks
+If you have made changes to your backend canister, you can generate a new candid interface with
 
-- Customize your project's code style by editing the `.prettierrc` file and then running `npm run format`.
-- Reduce the latency of update calls by passing the `--emulator` flag to `dfx start`.
-- Install a Motoko package by running `npx ic-mops add <package-name>`. Here is a [list of available packages](https://mops.one/).
-- Split your frontend and backend console output by running `npm run frontend` and `npm run backend` in separate terminals.
+```bash
+npm run generate
+```
+
+at any time. This is recommended before starting the frontend development server, and will be run automatically any time you run `dfx deploy`.
+
+If you are making frontend changes, you can start a development server with
+
+```bash
+npm start
+```
+
+Which will start a server at `http://localhost:8080`, proxying API requests to the replica at port 4943.
+
+### Note on frontend environment variables
+
+If you are hosting frontend code somewhere without using DFX, you may need to make one of the following adjustments to ensure your project does not fetch the root key in production:
+
+- set`DFX_NETWORK` to `ic` if you are using Webpack
+- use your own preferred method to replace `process.env.DFX_NETWORK` in the autogenerated declarations
+  - Setting `canisters -> {asset_canister_id} -> declarations -> env_override to a string` in `dfx.json` will replace `process.env.DFX_NETWORK` with the string in the autogenerated declarations
+- Write your own `createActor` constructor

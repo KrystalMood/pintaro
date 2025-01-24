@@ -1,23 +1,26 @@
 {
   "canisters": {
-    "backend": {
-      "type": "motoko",
-      "main": "backend/Backend.mo",
-      "declarations": {
-        "node_compatibility": true
-      }
+    "pintaro_backend": {
+      "main": "src/pintaro_backend/main.mo",
+      "type": "motoko"
     },
-    "frontend": {
-      "dependencies": ["backend"],
+    "pintaro_frontend": {
+      "dependencies": [
+        "pintaro_backend"
+      ],
+      "source": [
+        "src/pintaro_frontend/dist"
+      ],
       "type": "assets",
-      "source": ["dist/"]
+      "workspace": "pintaro_frontend"
     }
   },
   "defaults": {
     "build": {
-      "packtool": "npm run --silent sources"
+      "args": "",
+      "packtool": ""
     }
   },
   "output_env_file": ".env",
-  "version": 2
+  "version": 1
 }
