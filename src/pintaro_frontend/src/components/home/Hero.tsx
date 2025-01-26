@@ -1,12 +1,13 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import heroImage from '../../public/hero.png';
+import heroImage from '../../../public/hero.png';
+
 const Hero: FC = () => {
   return (
-    <div className="relative bg-white overflow-hidden h-full">
-      <div className="max-w-7xl mx-auto">
-        <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:pb-28 xl:pb-32">
-          <main className="mt-10 flex items-center justify-between mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 xl:mt-28">
+    <div className="relative min-h-screen bg-white overflow-hidden flex items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="relative z-10 bg-white">
+          <main className="flex items-center justify-between">
             <div className="text-left">
               <h1 className="text-7xl font-bold tracking-tight text-gray-900">
                 Jadilah Pintar

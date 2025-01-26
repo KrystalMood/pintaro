@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import Navigation from '../components/Navigation';
+import Navigation from '../components/common/Navigation';
 
 interface RootLayoutProps {
     children: ReactNode;
@@ -7,11 +7,10 @@ interface RootLayoutProps {
 
 const RootLayout: FC<RootLayoutProps> = ({ children }) => {
     return (
-        <div className="min-h-screen bg-white">
+        <div className="bg-white">
             <Navigation />
-            <div className="max-w-7xl mx-auto">
-                {children}
-            </div>
+            {children}
+
         </div>
     );
 };
