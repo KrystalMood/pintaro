@@ -55,10 +55,10 @@ const MobileNavigation: FC<MobileNavigationProps> = ({ isMenuOpen, setIsMenuOpen
             Contact
           </Link>
           <div className="px-3 py-2 space-y-1">
-            <Link to="/login" className="block w-full text-center px-4 py-2 rounded-md text-gray-700 hover:bg-gray-50">
+            <Link to="/masuk" className="block w-full text-center px-4 py-2 rounded-md text-gray-700 hover:bg-gray-50">
               Masuk
             </Link>
-            <Link to="/register" className="block w-full text-center px-4 py-2 rounded-md text-white bg-[#2c2c2c] hover:bg-gray-800">
+            <Link to="/daftar" className="block w-full text-center px-4 py-2 rounded-md text-white bg-[#2c2c2c] hover:bg-gray-800">
               Daftar
             </Link>
           </div>
