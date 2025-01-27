@@ -5,6 +5,7 @@ import DaftarPage from './pages/Daftar';
 import MasukPage from './pages/Masuk';
 import Dashboard from './pages/Dashboard';
 import Contact from './pages/Contact';
+import Courses from './pages/Courses';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/masuk" element={<MasukPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/courses" element={<Courses />} />
       </Routes>
     </Router>
   );

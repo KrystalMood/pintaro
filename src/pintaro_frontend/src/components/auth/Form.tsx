@@ -9,8 +9,8 @@ export default function AuthForm({ type }: FormProps): JSX.Element {
   const isRegister = type === 'daftar';
   
   return (
-    <div className="w-full p-6 shadow-md rounded-md border border-gray-300">
-      <form className="w-full flex flex-col space-y-3">
+    <div className="w-full p-6 shadow-lg rounded-xl border border-gray-300">
+      <form className="w-full flex flex-col space-y-4">
         <InputForm label="Email" type="email" />
         {isRegister && <InputForm label="Username" type="text" />}
         <InputForm label="Password" type="password" />
