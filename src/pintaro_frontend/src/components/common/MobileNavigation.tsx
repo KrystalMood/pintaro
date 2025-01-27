@@ -1,8 +1,9 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { SearchIcon } from '../icons/SearchIcon';
 import { CloseIcon } from '../icons/CloseIcon';
 import { MenuIcon } from '../icons/MenuIcon';
+import { useAuth } from '../../context/AuthContext';
 
 interface MobileNavigationProps {
   isMenuOpen: boolean;
@@ -10,9 +11,22 @@ interface MobileNavigationProps {
 }
 
 const MobileNavigation: FC<MobileNavigationProps> = ({ isMenuOpen, setIsMenuOpen }) => {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      setIsMenuOpen(false);
+      navigate('/');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
+
   return (
     <>
-      <div className="flex items-center md:hidden ">
+      <div className="flex items-center md:hidden">
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
@@ -45,12 +59,28 @@ const MobileNavigation: FC<MobileNavigationProps> = ({ isMenuOpen, setIsMenuOpen
             Contact
           </Link>
           <div className="px-3 py-2 space-y-1">
-            <Link to="/masuk" className="block w-full text-center px-4 py-2 rounded-md text-gray-700 hover:bg-gray-50">
-              Masuk
-            </Link>
-            <Link to="/daftar" className="block w-full text-center px-4 py-2 rounded-md text-white bg-[#2c2c2c] hover:bg-gray-800">
-              Daftar
-            </Link>
+            {user ? (
+              <>
+                <Link to="/profile" className="block w-full text-center px-4 py-2 rounded-md text-gray-700 hover:bg-gray-50">
+                  Profile
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="block w-full text-center px-4 py-2 rounded-md text-white bg-[#2c2c2c] hover:bg-gray-800"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/masuk" className="block w-full text-center px-4 py-2 rounded-md text-gray-700 hover:bg-gray-50">
+                  Masuk
+                </Link>
+                <Link to="/daftar" className="block w-full text-center px-4 py-2 rounded-md text-white bg-[#2c2c2c] hover:bg-gray-800">
+                  Daftar
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

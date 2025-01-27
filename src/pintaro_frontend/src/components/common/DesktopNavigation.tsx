@@ -1,8 +1,21 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { SearchIcon } from '../icons/SearchIcon';
+import { useAuth } from '../../context/AuthContext';
 
 const DesktopNavigation: FC = () => {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
+
   return (
     <>
       <div className="flex items-center relative">
@@ -32,15 +45,31 @@ const DesktopNavigation: FC = () => {
       </div>
 
       <div className="hidden md:flex items-center space-x-2">
-        <Link to="/masuk" className="text-gray-600 hover:text-gray-900 px-4 py-2 rounded-md">
-          Masuk
-        </Link>
-        <Link to="/daftar" className="bg-[#2c2c2c] text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors">
-          Daftar
-        </Link>
+        {user ? (
+          <>
+            <Link to="/profile" className="text-gray-600 hover:text-gray-900 px-4 py-2 rounded-md">
+              Profile
+            </Link>
+            <button
+              onClick={handleLogout}
+              className="bg-[#2c2c2c] text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/masuk" className="text-gray-600 hover:text-gray-900 px-4 py-2 rounded-md">
+              Masuk
+            </Link>
+            <Link to="/daftar" className="bg-[#2c2c2c] text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors">
+              Daftar
+            </Link>
+          </>
+        )}
       </div>
     </>
   );
 };
 
-export default DesktopNavigation; 
+export default DesktopNavigation;

@@ -15,7 +15,7 @@ const AuthLayout: FC<AuthLayoutProps> = ({ title, subtitle, children }) => {
         <div className="h-screen flex overflow-hidden">
             <div className="w-full lg:w-[47%] flex items-center justify-center p-8">
                 <button
-                    onClick={() => navigate(-1)}
+                    onClick={() => navigate('/')}
                     className="absolute top-6 left-6 text-gray-600 hover:text-gray-900 focus:outline-none"
                     aria-label="Kembali"
                 >

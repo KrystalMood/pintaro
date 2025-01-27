@@ -1,7 +1,7 @@
 {
   "canisters": {
     "pintaro_backend": {
-      "main": "src/pintaro_backend/main.mo",
+      "main": "src/pintaro_backend/auth/Auth.mo",
       "type": "motoko"
     },
     "pintaro_frontend": {
