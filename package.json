@@ -13,12 +13,15 @@
   },
   "type": "module",
   "workspaces": [
-    "src/pintaro_frontend"
+    "src/client"
   ],
   "dependencies": {
     "react-router-dom": "^7.1.3"
   },
   "devDependencies": {
-    "@types/node": "^22.10.10"
+    "@types/node": "^22.10.10",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }

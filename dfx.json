@@ -1,18 +1,14 @@
 {
   "canisters": {
-    "pintaro_backend": {
-      "main": "src/pintaro_backend/auth/Auth.mo",
+    "server": {
+      "main": "src/server/auth/Auth.mo",
       "type": "motoko"
     },
-    "pintaro_frontend": {
-      "dependencies": [
-        "pintaro_backend"
-      ],
-      "source": [
-        "src/pintaro_frontend/dist"
-      ],
+    "client": {
+      "dependencies": ["server"],
+      "source": ["src/client/dist"],
       "type": "assets",
-      "workspace": "pintaro_frontend"
+      "workspace": "client"
     }
   },
   "defaults": {
