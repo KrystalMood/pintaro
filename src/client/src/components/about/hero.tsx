@@ -18,10 +18,10 @@ const Hero: FC = () => {
           dan diakui secara global.
         </h5>
         <span className="mt-8 flex flex-col items-center gap-4 lg:flex-row">
-          <Link to="/daftar" className="inline-flex items-center rounded-md border border-transparent bg-[#2c2c2c] px-8 py-3 text-base font-medium text-white transition-colors hover:bg-gray-800">
+          <Link to="/login" className="inline-flex items-center rounded-md border border-transparent bg-[#2c2c2c] px-8 py-3 text-base font-medium text-white transition-colors hover:bg-gray-800">
             Bergabung Sekarang
           </Link>
-          <Link to={``} className="inline-flex items-center rounded-md border border-gray-300 bg-white px-8 py-3 text-base font-medium text-gray-700 transition-colors hover:bg-gray-50">
+          <Link to={`/courses`} className="inline-flex items-center rounded-md border border-gray-300 bg-white px-8 py-3 text-base font-medium text-gray-700 transition-colors hover:bg-gray-50">
             Pelajari Lebih Lanjut
           </Link>
         </span>

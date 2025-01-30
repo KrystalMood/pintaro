@@ -1,6 +1,6 @@
 import { Props } from "@/types/tentang-kami";
 
-export const alasan: Props[] = [
+export const reason: Props[] = [
   {
     icon: "fa-solid fa-circle-check",
     title: "Kualitas Terjamin",
@@ -18,7 +18,7 @@ export const alasan: Props[] = [
   },
 ];
 
-export const fitur: Props[] = [
+export const features: Props[] = [
   {
     icon: "fa-regular fa-circle-check",
     title: "Verifikasi Instan",

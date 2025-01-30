@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { fitur } from "@/data/tentang-kami";
+import { features } from "@/data/tentang-kami";
 
 const TeknologiBlockchain: FC = () => {
   return (
@@ -12,7 +12,7 @@ const TeknologiBlockchain: FC = () => {
         Platform pembelajaran yang dirancang untuk membantu Anda mencapai
         potensi maksimal dengan teknologi terkini.
       </h4>
-      {fitur.map((features, index) => (
+      {features.map((features, index) => (
         <figure key={index} className="mb-6 flex transform items-start space-x-4 rounded-lg bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md">
           <i className={`${features.icon} mt-1 text-xl text-[#f7b32b]`} />
           <figcaption className="cursor-default">

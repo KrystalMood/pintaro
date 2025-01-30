@@ -1,12 +1,12 @@
 {
   "canisters": {
     "server": {
-      "main": "src/server/auth/Auth.mo",
+      "main": "src/server/main.mo",
       "type": "motoko"
     },
     "client": {
       "dependencies": ["server"],
-      "source": ["src/client/dist"],
+      "source": ["./src/client"],
       "type": "assets",
       "workspace": "client"
     }

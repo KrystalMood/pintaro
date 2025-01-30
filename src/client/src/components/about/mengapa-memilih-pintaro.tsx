@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { alasan } from "@/data/tentang-kami";
+import { reason } from "@/data/tentang-kami";
 
 const MengapaMemilihPintaro: FC = () => {
   return (
@@ -12,7 +12,7 @@ const MengapaMemilihPintaro: FC = () => {
         potensi maksimal dengan teknologi terkini.
       </h4>
       <div className="grid grid-cols-1 gap-8 place-items-center lg:grid-cols-3">
-        {alasan.map((reason, index) => (
+        {reason.map((reason, index) => (
           <figure key={index} className="rounded-lg h-full bg-white p-8 shadow-md transition-shadow hover:shadow-xl">
             <i className={`${reason.icon} mb-6 text-4xl text-[#f7b32b]`} />
             <h4 className="mb-4 cursor-default text-2xl font-semibold text-gray-900">

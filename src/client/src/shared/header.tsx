@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import { useAuth } from '../../context/auth';
+// import { useAuth } from "@/context/auth";
 import MobileMenu from "@/shared/mobile-menu";
 
 const Header: FC = () => {
