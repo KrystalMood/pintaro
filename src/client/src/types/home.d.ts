@@ -1,6 +1,8 @@
 export interface IMobileMenu {
   isMenuOpen: boolean;
   setIsMenuOpen: (isOpen: boolean) => void;
+  isAuthenticated: boolean;
+  onLogout: () => void;
 }
 
 export interface Course {

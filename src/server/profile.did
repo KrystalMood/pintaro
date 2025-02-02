@@ -1,0 +1,52 @@
+type Profile = record {
+    walletAddress : text;
+    nonce : opt text;
+    chainId : opt int;
+    networkVersion : opt text;
+    username : text;
+    email : text;
+    fullName : text;
+    avatarUrl : opt text;
+    enrolledCourses : vec text;
+    completedCourses : vec text;
+    certificates : opt record {
+        courseId : text;
+        tokenId : text;
+        issuedAt : int;
+        transactionHash : text;
+    };
+    headline : opt text;
+    bio : opt text;
+    skills : vec text;
+    expertise : vec text;
+    reputation : int;
+    badges : vec text;
+    forumPosts : int;
+    notificationSettings : record {
+        email : bool;
+        browser : bool;
+        courseUpdates : bool;
+        communityMessages : bool;
+    };
+    createdAt : int;
+    updatedAt : int;
+    lastUpdated : int;
+};
+
+type Result = variant {
+    ok : Profile;
+    err : text;
+};
+
+type ImageResult = variant {
+    ok : text;
+    err : text;
+};
+
+service : {
+    getProfile : (walletAddress : text) -> (query Result);
+    createProfile : (walletAddress : text, profile : Profile) -> (Result);
+    updateProfile : (walletAddress : text, profile : Profile) -> (Result);
+    deleteProfile : (walletAddress : text) -> (Result);
+    uploadProfileImage : (walletAddress : text, imageData : text) -> (ImageResult);
+}; 

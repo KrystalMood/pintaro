@@ -1,21 +1,9 @@
 import { FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import { useAuth } from '../../context/auth';
 import { IMobileMenu } from "@/types/home";
 
-const MobileMenu: FC<IMobileMenu> = ({ isMenuOpen, setIsMenuOpen }) => {
-  // const { user, logout } = useAuth();
+const MobileMenu: FC<IMobileMenu> = ({ isMenuOpen, setIsMenuOpen, isAuthenticated, onLogout }) => {
   const navigate = useNavigate();
-
-  const HandleLogout = async () => {
-    try {
-      // await logout();
-      setIsMenuOpen(false);
-      navigate("/");
-    } catch (error) {
-      console.error("Terjadi kesalahan saat keluar dari akun: ", error);
-    }
-  };
 
   return (
     <section className={`${isMenuOpen ? "block" : "hidden"} absolute top-16 right-0 left-0 space-y-1 border-b border-gray-100 bg-white px-2 pt-2 pb-3 shadow-md md:hidden`}>
@@ -39,9 +27,30 @@ const MobileMenu: FC<IMobileMenu> = ({ isMenuOpen, setIsMenuOpen }) => {
           {list}
         </Link>
       ))}
-      <Link to="/login" className="mx-3 my-2 block rounded-md bg-[#2c2c2c] py-2 text-center text-white hover:bg-gray-800">
-        Login
-      </Link>
+      
+      {isAuthenticated ? (
+        <>
+          <Link
+            to="/settings?=profile"
+            className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+          >
+            Profile Settings
+          </Link>
+          <button
+            onClick={() => {
+              onLogout();
+              setIsMenuOpen(false);
+            }}
+            className="block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+          >
+            Logout
+          </button>
+        </>
+      ) : (
+        <Link to="/login" className="mx-3 my-2 block rounded-md bg-[#2c2c2c] py-2 text-center text-white hover:bg-gray-800">
+          Login
+        </Link>
+      )}
     </section>
   );
 };

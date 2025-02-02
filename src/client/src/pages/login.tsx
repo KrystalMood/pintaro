@@ -1,52 +1,85 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import Main from "@/layouts/main";
+import LoginForm from "@/components/auth/LoginForm";
+import { useAuth } from "@/context/auth";
 
 const Login: FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const { login } = useAuth();
+
+  const handleMetaMaskLogin = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      
+      if (!window.ethereum) {
+        throw new Error("METAMASK_NOT_INSTALLED");
+      }
+
+      const accounts = await window.ethereum.request({ 
+        method: 'eth_requestAccounts' 
+      });
+
+      const account = accounts[0];
+      
+      if (account) {
+        login(account);
+      }
+    } catch (error) {
+      console.error('MetaMask login failed:', error);
+      if (error instanceof Error) {
+        if (error.message === "METAMASK_NOT_INSTALLED") {
+          setError("MetaMask tidak terinstall. Silakan instal MetaMask terlebih dahulu.");
+        } else {
+          setError("Gagal terhubung ke MetaMask. Silakan coba lagi.");
+        }
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <Main auth={true} title="Login" description="Log in to your account to access courses, exclusive materials, and more. Start your learning journey with Pintaro today!">
-      <main className="flex items-center justify-between">
-        <form action="" method="POST" className="h-full w-1/2 cursor-default px-12 py-24">
-          <h1 className="text-5xl font-bold">Jadi Pintar dengan Pintaro</h1>
-          <h5 className="mt-4 italic">
-            Jelajahi berbagai kursus dari kami yang dapat menunjang keterampilan
-            Anda di era Society 5.0
-          </h5>
-          <button
-            type="submit"
-            onClick={() => {}}
-            className="mt-8 flex w-full cursor-pointer items-center justify-center space-x-4 rounded-lg bg-slate-900 py-4 font-bold text-slate-50 transition-colors duration-300 lg:hover:bg-slate-700"
-          >
-            <img src="/img/autentikasi/metamask.jpg" alt="" className="w-6" />
-            <h5>Lanjutkan dengan MetaMask</h5>
-          </button>
-          <div className="relative mt-8 flex w-full items-center justify-center">
-            <span className="absolute h-0.25 w-full bg-slate-300" />
-            <h5 className="z-10 bg-white px-4 font-bold">ATAU</h5>
+    <Main 
+      auth={true} 
+      title="Login" 
+      description="Log in to your account to access courses, exclusive materials, and more. Start your learning journey with Pintaro today!"
+    >
+      <div className="min-h-screen flex flex-col lg:flex-row">
+        <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 bg-white">
+          {error && (
+            <div className="absolute top-4 left-4 right-4 flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50">
+              <div className="ms-3 text-sm font-medium">
+                {error}
+                {error.includes("not installed") && (
+                  <a
+                    href="https://metamask.io/download/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold underline hover:no-underline ms-2"
+                  >
+                    Install MetaMask
+                  </a>
+                )}
+              </div>
+            </div>
+          )}
+          <LoginForm onMetaMaskLogin={handleMetaMaskLogin} isLoading={isLoading} />
+        </div>
+
+        <div className="hidden lg:flex flex-1 bg-slate-50">
+          <div className="relative w-full h-full">
+            <img 
+              src="/img/autentikasi/masuk.png" 
+              alt="Selamat datang di Pintaro!" 
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-900/10 to-slate-900/0" />
           </div>
-          <button
-            type="submit"
-            onClick={() => {}}
-            className="mt-8 flex w-full cursor-pointer items-center justify-center space-x-4 rounded-lg border-2 border-slate-900 py-4 font-bold text-slate-900 transition-colors duration-300 lg:hover:bg-slate-900 lg:hover:text-slate-50"
-          >
-            <i className="fa-brands fa-google" />
-            <h5>Lanjutkan dengan Google</h5>
-          </button>
-          <h6 className="mt-8 text-center text-sm italic">
-            By logging in, you agree to our&nbsp;
-            <Link to="/terms-of-service" className="underline transition-colors duration-300 lg:hover:text-slate-700">
-              Terms of Service
-            </Link>
-          </h6>
-          <Link to="/" className="mt-8 flex items-center justify-center lg:hover:text-slate-700 lg:hover:underline">
-            <i className="fa-solid fa-arrow-left mt-0.5" />
-            <h5>&emsp;Kembali Ke Beranda</h5>
-          </Link>
-        </form>
-        <section className="hidden w-1/2 lg:inline">
-          <img src="/img/autentikasi/masuk.png" alt="Selamat datang di Pintaro!" />
-        </section>
-      </main>
+        </div>
+      </div>
     </Main>
   );
 };

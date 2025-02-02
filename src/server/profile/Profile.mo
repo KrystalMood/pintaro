@@ -1,14 +1,11 @@
 import HashMap "mo:base/HashMap";
 import Text "mo:base/Text";
-import Types "./types/Types";
-import Time "mo:base/Time";
+import Types "../types/Types";
+import Result "mo:base/Result";
 
-actor {
+actor Profile {
   private let profiles = HashMap.HashMap<Text, Types.Profile>(10, Text.equal, Text.hash);
-
-  public query func greet(name : Text) : async Text {
-    return "Hello, " # name # "!";
-  };
+  private let images = HashMap.HashMap<Text, Text>(10, Text.equal, Text.hash);
 
   public shared query func getProfile(walletAddress : Text) : async Types.ProfileResult {
     switch (profiles.get(walletAddress)) {
@@ -23,34 +20,16 @@ actor {
     };
 
     profiles.put(walletAddress, profile);
-    
-    switch (profiles.get(walletAddress)) {
-      case (null) { #err("Failed to create profile") };
-      case (?createdProfile) { #ok(createdProfile) };
-    }
+    #ok(profile)
   };
 
   public shared func updateProfile(walletAddress : Text, profile : Types.Profile) : async Types.ProfileResult {
-    if (profile.walletAddress != walletAddress) {
-      return #err("Wallet address mismatch");
+    if (profiles.get(walletAddress) == null) {
+      return #err("Profile not found");
     };
 
-    switch (profiles.get(walletAddress)) {
-      case (null) {
-        profiles.put(walletAddress, profile);
-        switch (profiles.get(walletAddress)) {
-          case (null) { #err("Failed to create profile") };
-          case (?createdProfile) { #ok(createdProfile) };
-        }
-      };
-      case (?existingProfile) {
-        profiles.put(walletAddress, profile);
-        switch (profiles.get(walletAddress)) {
-          case (null) { #err("Failed to update profile") };
-          case (?updatedProfile) { #ok(updatedProfile) };
-        }
-      };
-    }
+    profiles.put(walletAddress, profile);
+    #ok(profile)
   };
 
   public shared func deleteProfile(walletAddress : Text) : async Types.ProfileResult {
@@ -63,19 +42,23 @@ actor {
     };
   };
 
-  public shared func uploadProfileImage(walletAddress : Text, base64Image : Text) : async Types.ImageUploadResult {
+  public shared func uploadProfileImage(walletAddress : Text, imageData : Text) : async Result.Result<Text, Text> {
+    if (profiles.get(walletAddress) == null) {
+      return #err("Profile not found");
+    };
+
+    images.put(walletAddress, imageData);
+    
     switch (profiles.get(walletAddress)) {
       case (null) { #err("Profile not found") };
       case (?profile) {
         let updatedProfile = {
           profile with
-          avatarUrl = ?base64Image;
-          updatedAt = Time.now();
-          lastUpdated = Time.now();
+          avatarUrl = ?imageData;
         };
         profiles.put(walletAddress, updatedProfile);
-        #ok(base64Image)
+        #ok(imageData)
       };
     };
   };
-};
+}; 

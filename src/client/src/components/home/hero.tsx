@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Hero: FC = () => {
   return (
-    <section className="mx-auto mt-12 flex items-center justify-between bg-white px-4 py-40 sm:px-6 lg:px-8 lg:py-20">
+    <section className="w-[90%] mx-auto mt-12 flex items-center justify-between bg-white px-4 py-40 sm:px-6 lg:px-8 lg:py-20">
       <div className="text-center lg:text-left">
         <h1 className="cursor-default text-5xl font-bold tracking-tight text-gray-900 md:text-6xl lg:text-7xl">
           Jadilah Pintar
