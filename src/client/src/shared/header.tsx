@@ -29,8 +29,11 @@ const Header: FC = () => {
         <img src="/ico/logo.png" alt="Logo" className="w-32" />
       </Link>
       <section className="relative mx-8 hidden w-full flex-1 items-center lg:flex">
+        <label htmlFor="desktop_search" className="hidden" />
         <input
           type="search"
+          name="desktop_search"
+          id="desktop_search"
           placeholder="Apa yang ingin anda pelajari?"
           className="w-full rounded-full border border-gray-300 px-4 py-2 pl-12 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none"
         />

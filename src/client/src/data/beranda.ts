@@ -1,4 +1,4 @@
-import { Course, SocialMedia } from "@/types/beranda";
+import { Course, SocialMedia } from "@/types/home";
 
 export const courses: Course[] = [
   {

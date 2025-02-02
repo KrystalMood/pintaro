@@ -1,4 +1,4 @@
-import { Props } from "@/types/tentang-kami";
+import { Props } from "@/types/about";
 
 export const reason: Props[] = [
   {

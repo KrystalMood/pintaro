@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { CourseFilter } from "@/types/kursus";
+import { CourseFilter } from "@/types/courses";
 
 const Filter: FC<CourseFilter> = ({ selectedCategory, setSelectedCategory, searchQuery, setSearchQuery }) => {
   const categories = ["Semua Kursus", "Pengembangan Web", "Desain Grafis", "Pemasaran Digital", "Pengembangan Diri"];

@@ -18,8 +18,9 @@ export interface RegisterCredentials {
   confirmPassword: string;
 }
 
-interface InputFormProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputFormProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
+  type?: string;
   isTextArea?: boolean;
   textAreaProps?: TextareaHTMLAttributes<HTMLTextAreaElement>;
 }

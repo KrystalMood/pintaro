@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 // import { AuthProvider } from "@/context/auth";
 // import PrivateRoute from "@/components/auth/PrivateRoute";
 import NotFound from "@/pages/404";
@@ -9,6 +9,7 @@ import Dashboard from "@/pages/dashboard";
 import Login from "@/pages/login";
 import Contact from "@/pages/contact";
 import Course from "@/pages/course";
+import Settings from "@/pages/settings";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/courses" element={<Course />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </Router>
   );

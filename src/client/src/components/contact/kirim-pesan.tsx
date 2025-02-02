@@ -2,7 +2,7 @@ import { FC, FormEvent, useState } from "react";
 import InputForm from "@/shared/input-form";
 
 const KirimPesan: FC = () => {
-  const [formData, setFormData] = useState<{ name: string; email: string; subject: string; message: string; }>({ name: "", email: "", subject: "", message: "" });
+  const [formData, setFormData] = useState({ nama_lengkap: "", email: "", subjek: "", pesan: "" });
 
   return (
     <form onSubmit={(e: FormEvent) => e.preventDefault()} className="rounded-b-xl bg-slate-50 p-8 pb-10 lg:rounded-r-3xl lg:p-12">
@@ -13,35 +13,36 @@ const KirimPesan: FC = () => {
         <span className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <InputForm
             label="Nama Lengkap"
-            type="text"
-            value={formData.name}
-            onChange={e => setFormData({ ...formData, name: e.target.value })}
+            onChange={e => setFormData({ ...formData, nama_lengkap: e.target.value })}
+            placeholder="Masukkan nama lengkap Anda"
+            value={formData.nama_lengkap}
             required
           />
           <InputForm
             label="Email"
             type="email"
-            value={formData.email}
             onChange={e => setFormData({ ...formData, email: e.target.value })}
+            placeholder="Masukkan email Anda"
+            value={formData.email}
             required
           />
         </span>
         <InputForm
           label="Subjek"
-          type="text"
-          value={formData.subject}
-          onChange={e => setFormData({ ...formData, subject: e.target.value })}
+          onChange={e => setFormData({ ...formData, subjek: e.target.value })}
+          placeholder="Masukkan subjek"
+          value={formData.subjek}
           required
         />
         <InputForm
           label="Pesan"
           isTextArea
           textAreaProps={{
-            value: formData.message,
-            onChange: e => setFormData({ ...formData, message: e.target.value }),
-            rows: 4,
             maxLength: 2000,
+            onChange: e => setFormData({ ...formData, pesan: e.target.value }),
             required: true,
+            rows: 4,
+            value: formData.pesan,
           }}
         />
         <button

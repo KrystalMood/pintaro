@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Course } from "@/types/beranda";
+import { Course } from "@/types/home";
 
 const KartuKursus: FC<{ course: Course }> = ({ course }) => {
   return (

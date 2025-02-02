@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { Course } from "@/types/kursus";
+import { Course } from "@/types/courses";
 
 const CourseCard: FC<{ course: Course }> = ({ course }) => {
   return (
